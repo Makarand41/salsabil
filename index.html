@@ -5,54 +5,62 @@
   <meta charset="UTF-8">
   <title>Software Company</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="style.mobile.css">
+  <link rel="stylesheet" href="style.mobile.css"> 
+  <script src="script2.js" defer></script>
+
   <link rel="icon" type="image/png" href="media.jpg">
 
 </head>
 <body>
 
   <!-- NAVIGATION BAR -->
-  <nav class="navbar">
-    <div class="logo">
-  <a href="#" class="home-link">
-    <img src="Media.jpg" alt="Logo">
-  </a>
-</div>
+<nav class="navbar">
+  <div class="logo">
+    <a href="#" class="home-link" aria-label="Home">
+      <img src="Media.jpg" alt="Logo">
+    </a>
+  </div>
 
-    <ul class="nav-links">
-      <li>
-        <li><a href="#services">SERVICES</a></li>
-        <div class="dropdown">
-          <a href="#">Web Development</a>
-          <a href="#">Mobile App Development</a>
-          <a href="#">UI/UX Design</a>
+  <!-- Hamburger button (for mobile) -->
+  <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
 
-        </div>
-      </li>
-      <li>
-        <li><a href="#technologies">TECHNOLOGIES</a></li>
-        <div class="dropdown">
-          <a href="#">HTML/CSS/JS</a>
-          <a href="#">React & Angular</a>
-          <a href="#">PHP & Node.js</a>
-        </div>
-      </li>
-      <li>
-        <li><a href="#industries">INDUSTRIES</a></li>
-        <div class="dropdown">
-          <a href="#">Healthcare</a>
-          <a href="#">E-commerce</a>
-          <a href="#">Education</a>
-        </div>
-      </li>
-      <!-- <li><a href="#">PORTFOLIO</a></li>
-      <li><a href="#">INSIGHTS</a></li> -->
-       <li><a href="#about">ABOUT</a></li>
-      <li><a href="#contact" >CONTACT</a></li>
-      <li><a href="education.html">EDUCATION</a></li>
+  <ul class="nav-links" id="nav-links">
+    <li class="has-dropdown">
+      <a href="#services">SERVICES</a>
+      <div class="dropdown" aria-hidden="true">
+        <a href="#">Web Development</a>
+        <a href="#">Mobile App Development</a>
+        <a href="#">UI/UX Design</a>
+      </div>
+    </li>
 
-    </ul>
-  </nav>
+    <li class="has-dropdown">
+      <a href="#technologies">TECHNOLOGIES</a>
+      <div class="dropdown" aria-hidden="true">
+        <a href="#">HTML/CSS/JS</a>
+        <a href="#">React & Angular</a>
+        <a href="#">PHP & Node.js</a>
+      </div>
+    </li>
+
+    <li class="has-dropdown">
+      <a href="#industries">INDUSTRIES</a>
+      <div class="dropdown" aria-hidden="true">
+        <a href="#">Healthcare</a>
+        <a href="#">E-commerce</a>
+        <a href="#">Education</a>
+      </div>
+    </li>
+
+    <li><a href="#about">ABOUT</a></li>
+    <li><a href="#contact">CONTACT</a></li>
+    <li><a href="education.html">EDUCATION</a></li>
+  </ul>
+</nav>
 
   <!-- HERO SECTION -->
  <section class="hero-section">
@@ -253,8 +261,10 @@
       </div>
     </div>
 
-    <div class="nav prev">&#10094;</div>
-    <div class="nav next">&#10095;</div>
+    <div class="nav-container">
+  <div class="nav prev">&#10094;</div>
+  <div class="nav next">&#10095;</div>
+</div>
   </section>
 
 
@@ -606,33 +616,7 @@
   </div>
 </footer>
 
-<script>
-  let slides = document.querySelectorAll('.slide');
-  let current = 0;
 
-  function showSlide(index) {
-    slides.forEach((slide, i) => {
-      slide.classList.toggle('active', i === index);
-    });
-  }
-
-  document.querySelector('.nav.next').addEventListener('click', () => {
-    current = (current + 1) % slides.length;
-    showSlide(current);
-  });
-
-  document.querySelector('.nav.prev').addEventListener('click', () => {
-    current = (current - 1 + slides.length) % slides.length;
-    showSlide(current);
-  });
-
-  // Initial show
-  showSlide(current);
-
-
-
-
-</script>
 
 </body>
 

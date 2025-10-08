@@ -1,176 +1,297 @@
-/* Mobile / Small-screen responsive overrides for your site
-   Save as `style.mobile.css` and include AFTER your main stylesheet:
-   <link rel="stylesheet" href="style.css">
-   <link rel="stylesheet" href="style.mobile.css">
+/* ===========================
+   Mobile & Tablet Styles
+   (save as style.mobile.css)
+   =========================== */
 
-   This file uses only CSS media queries to adapt layout for
-   tablets and phones (<= 768px and <= 480px). For an off-canvas
-   hamburger menu or more interactive behaviors a little JS will
-   be needed — I added comments where that would help.
-*/
+/* General responsive helpers */
+@media (max-width: 1024px) {
+  .logo img { width: 64px; height: 64px; }
+  .navbar { padding: 14px 28px; }
+  .hero-content h1 { font-size: 40px; }
+  .hero-content h2 { font-size: 28px; }
+  .hero-content p { font-size: 17px; }
+  .services-header h2 { font-size: 30px; }
+}
 
-/* === GLOBAL ADJUSTMENTS FOR SMALL SCREENS === */
+/* Tablet and mobile */
 @media (max-width: 768px) {
-  html, body { font-size: 14px; }
 
-  /* Navbar becomes vertical and compact */
+  /* NAVBAR: make navbar compact and enable hamburger usage */
   .navbar {
-    flex-direction: row;
+    padding: 12px 18px;
     align-items: center;
     gap: 12px;
-    padding: 12px 16px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: #072c52c9; /* keep background for fixed bar */
   }
 
-  .logo img { width: 56px; height: 56px; }
+  /* Logo smaller */
+  .logo img { width: 52px; height: 52px; }
 
-  /* Make nav-links wrap and use smaller spacing */
+  /* Hamburger: shown via narrower breakpoints */
+  .hamburger { display: none; } /* default hidden; shown below at 900px */
+
+  /* Default nav-links hidden (off-screen) — will slide in */
   .nav-links {
-    gap: 8px;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: fixed;
+    top: 72px; /* a bit below navbar */
+    right: -110%;
+    width: 78%;
+    max-width: 320px;
+    height: calc(100vh - 72px);
+    background-color: #072c52;
+    padding: 20px;
+    overflow-y: auto;
+    transition: right 0.32s ease;
+    z-index: 1000;
+    -webkit-overflow-scrolling: touch;
   }
 
-  /* Each nav link becomes slightly smaller pill */
+  /* When open, slide to visible */
+  .nav-links.open { right: 0; }
+
   .nav-links a {
-    padding: 8px 10px;
-    font-size: 14px;
-  }
-
-  /* Dropdowns: position relative to their parent and full-width on small screens */
-  .dropdown {
-    position: static;
-    display: none; /* keeps current hover behaviour; show with hover or JS */
+    color: #fff;
+    padding: 10px 6px;
+    text-decoration: none;
     width: 100%;
-    background-color: rgba(115,126,137,0.95);
-    border-radius: 6px;
-    margin-top: 6px;
+    display: block;
+    font-size: 16px;
   }
 
-  /* Hero: reduce height and scale text */
+  /* Dropdowns on mobile become stacked and hidden by default */
+  .dropdown {
+    display: none;
+    padding-left: 10px;
+    margin-top: 6px;
+    background: transparent;
+  }
+
+  /* Toggle dropdown when parent has .open-dropdown (JS will add/remove) */
+  .has-dropdown.open-dropdown .dropdown { display: block; }
+
+  /* HERO: fluid */
   .hero-section {
     height: auto;
-    padding: 80px 16px 40px;
+    padding: 80px 18px 40px;
     background-position: center top;
+    min-height: 60vh;
   }
 
-  .hero-content h1 { font-size: 28px; }
-  .hero-content h2 { font-size: 20px; }
-  .hero-content p { font-size: 15px; }
+  .hero-content { padding: 0 6px; }
+  .hero-content h1 { font-size: 28px; line-height: 1.08; }
+  .hero-content h2 { font-size: 20px; margin-top: 6px; }
+  .hero-content p { font-size: 15px; margin: 14px 0; }
 
-  .buttons { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
-  .btn, .btn-outline { padding: 10px 14px; font-size: 14px; }
+  .buttons .btn, .buttons .btn-outline {
+    width: 100%;
+    margin: 8px 0;
+    padding: 10px;
+    box-sizing: border-box;
+  }
 
-  /* About stats stack nicely */
+  /* ABOUT / STATS stack */
+  .about-section { padding: 30px 18px; }
+  .about-text p { font-size: 15px; max-width: 100%; }
   .about-stats { gap: 16px; }
-  .stat { border-right: none; max-width: none; text-align: center; }
-  .stat h2 { font-size: 26px; }
-  .stat p { font-size: 14px; line-height: 1.4; }
+  .stat { max-width: 100%; flex: 1 1 100%; border-right: none; text-align: center; padding: 10px 8px; }
 
-  /* Services cards stack to single column */
-  .services-cards, .service-section { flex-direction: column; align-items: center; }
-  .service-card { max-width: 92%; padding: 20px; }
+  .logos img { height: 54px; }
 
-  /* Slider: images and content stack vertically */
-  .slide { flex-direction: column; padding: 20px; }
-  .slider-image img { width: 100%; max-width: 420px; }
-  .slider-content { max-width: 100%; }
+  /* SERVICES - stack cards */
+  .services-section { padding: 30px 16px; }
+  .services-cards { flex-direction: column; gap: 18px; align-items: center; }
+  .service-card { max-width: 100%; width: 100%; padding: 20px; }
 
-  .nav.prev, .nav.next { display: none; } /* optional: remove arrows on small screens */
+  .service-section { padding: 30px 12px; gap: 18px; }
 
-  /* Tech grid -> single column */
-  .tech-grid { gap: 24px; }
-  .category { flex-direction: column; align-items: stretch; }
-  .label { min-width: auto; margin: 0 0 8px 0; }
-  .tags { margin-left: 0; }
-  .tags span { padding: 8px 12px; font-size: 14px; }
+  /* TECH GRID: stack categories */
+  .tech-grid { gap: 20px; padding: 20px; }
+  .category { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .label { min-width: auto; width: 100%; }
+  .tags { margin-left: 0; gap: 8px; }
 
-  /* Industries and client logos */
-  .industries { flex-direction: column; gap: 20px; }
-  .client-logos { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 18px; }
-  .client-logos img { max-width: 90px; max-height: 50px; }
+  /* OUTSOURCING / INDIA / Salsabi sections - stack columns */
+  .outsourcing-section, .india-dev-section { padding: 24px 14px; gap: 20px; }
+  .image-container, .image-column, .content, .text-column { flex: 1 1 100%; min-width: 0; }
 
-  /* Outsourcing / India dev sections: stack */
-  .outsourcing-section, .india-dev-section { padding: 30px 16px; }
-  .image-container, .image-column { order: 0; width: 100%; }
-  .content, .text-column { width: 100%; }
+  .salsabi-section { padding: 30px 16px; }
+  .card-container { gap: 18px; }
 
-  /* Cards grid becomes single column */
-  .card-container { grid-template-columns: 1fr; }
+  .features { flex-direction: column; padding: 20px 12px; gap: 16px; }
+  .feature-box { width: 100%; max-width: 100%; margin: 12px 0; }
 
-  /* Footer columns stack */
-  .footer-top { flex-direction: column; gap: 20px; }
-  .footer-column { margin: 0; }
+  .footer { padding: 30px 18px; }
+  .footer-top { flex-direction: column; gap: 18px; }
+  .footer-column { margin: 0; width: 100%; }
 
-  /* Prevent huge section top padding on mobile (your global rule adds 100px) */
+  /* small adjustments for anchors/spacing */
   section { scroll-margin-top: 72px; padding-top: 72px; }
 }
 
-/* === NARROW / PHONE PORTRAIT (VERY SMALL) === */
-@media (max-width: 480px) {
-  html, body { font-size: 13px; }
-
-  .logo img { width: 48px; height: 48px; }
-
+/* Extra small phones */
+@media (max-width: 420px) {
   .navbar { padding: 10px 12px; }
-
-  /* Make nav links take full width and stack under the navbar visually
-     Note: this will show the full list. If you prefer a hidden hamburger menu,
-     add a small JS toggle that adds `.navbar--open` class and uncomment rules below.
-  */
-  .nav-links { width: 100%; justify-content: space-between; gap: 6px; }
-  .nav-links li { width: auto; }
-  .nav-links a { padding: 8px 10px; font-size: 13px; }
-
+  .logo img { width: 48px; height: 48px; }
+  .hero-section { padding: 60px 12px 30px; min-height: 55vh; }
   .hero-content h1 { font-size: 22px; }
-  .hero-content h2 { font-size: 18px; }
+  .hero-content h2 { font-size: 16px; }
   .hero-content p { font-size: 14px; }
-
-  .service-card { padding: 16px; }
-  .service-card h3 { font-size: 18px; }
-
-  .slider-image img { max-width: 100%; height: auto; }
-  .slider-content h1 { font-size: 1.25rem; }
-
-  .tags span { padding: 6px 10px; font-size: 13px; }
-
-  .cta-section { padding: 28px 16px; }
-  .cta-button { padding: 12px 18px; }
-
-  /* small tweaks for lists, spacing */
-  .content p, .text-column p, .about-text p { font-size: 14px; }
-
-  /* Very small client logos */
-  .client-logos img { max-width: 72px; max-height: 42px; }
-
-  /* Section padding reduction */
-  .about-section, .services-section, .salsabi-section { padding: 30px 14px; }
-
-  /* Optional (recommended): Simple CSS-only off-canvas hamburger idea using checkbox
-     Add the following HTML to your navbar (near logo) if you want a hamburger without JS:
-
-     <input id="nav-toggle" type="checkbox" />
-     <label for="nav-toggle" class="nav-toggle-label">☰</label>
-
-     Then uncomment the rules below to hide nav-links by default and reveal when checked.
-  */
-
-  /*
-  #nav-toggle { display: none; }
-  .nav-toggle-label { font-size: 26px; cursor: pointer; margin-left: auto; }
-  .nav-links { display: none; width: 100%; flex-direction: column; }
-  #nav-toggle:checked + .nav-links { display: flex; }
-  */
+  .nav-links a { font-size: 14px; padding: 8px 6px; }
+  .services-header h2 { font-size: 24px; }
+  .case-studies { margin: 60px 12px; }
+  .client-logos img { max-width: 80px; max-height: 48px; }
+  .cta-section { padding: 20px 12px; flex-direction: column; align-items: flex-start; gap: 12px; }
+  .cta-button { width: 100%; }
 }
 
-/* Accessibility helper: increase touch target size for interactive items */
-@media (pointer: coarse) {
-  .nav-links a, .btn, .case-button, .cta-button, .tab { padding: 12px 14px; }
+/* Accessibility: ensure focus states visible on mobile */
+a:focus, button:focus {
+  outline: 3px solid rgba(255,152,0,0.25);
+  outline-offset: 2px;
 }
 
-/* Small improvement: Reduce the hero background fixed-size on mobile (avoid large download) */
+/* -----------------------------------
+   Hamburger button (mobile)
+   ----------------------------------- */
+.hamburger {
+  display: none; /* shown in the smaller breakpoint below */
+  flex-direction: column;
+  justify-content: space-between;
+  width: 26px;
+  height: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1100;
+}
+
+.hamburger span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+/* Transform to "X" when active */
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Show hamburger on <= 900px */
+@media (max-width: 900px) {
+  .hamburger { display: flex; }
+}
+
+/* ===========================
+   Mobile-specific nav breakpoint
+   =========================== */
+@media (max-width: 900px) {
+  /* keep nav offscreen by default (desktop rules show it inline) */
+  .nav-links {
+    right: -110%;
+  }
+
+  .nav-links.open {
+    right: 0;
+  }
+
+  /* Dropdowns inside slide-in nav are toggled via JS (class .open-dropdown) */
+  .dropdown { display: none; }
+  .has-dropdown.open-dropdown .dropdown { display: block; }
+
+  .nav-links a { color: #fff; }
+}
+
+/* === Slider Mobile Fix & show arrows on mobile === */
 @media (max-width: 768px) {
-  .hero-section { background-attachment: scroll; }
+  .slider { padding: 20px 0; }
+  .slide { flex-direction: column; text-align: center; padding: 18px; gap: 18px; }
+
+  .slider-image img {
+    width: 90%;
+    max-width: 420px;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .slider-content { max-width: 90%; margin: 0 auto; }
+
+  /* Make nav arrows visible on mobile and place them centered below slider */
+  .nav {
+    position: static !important;
+    display: inline-block !important;
+    margin: 12px 8px;
+    background: #072c52 !important;
+    color: #fff !important;
+    font-size: 1.4rem !important;
+    padding: 8px 12px !important;
+    transform: none !important;
+    box-shadow: none;
+  }
+
+  .slider .nav-container {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .nav.prev, .nav.next {
+    transform: none !important;
+  }
 }
 
-/* End of mobile overrides */
+
+@media (max-width: 768px) {
+  /* ensure arrows are visible (override earlier 'display: none') */
+  .nav.prev, .nav.next {
+    display: inline-block !important;
+  }
+
+  /* move arrows into a centered container under the slide */
+  .slider .nav-container {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 12px;
+    align-items: center;
+  }
+
+  .slider .nav {
+    position: static;
+    transform: none;
+    font-size: 1.6rem;
+    padding: 8px 12px;
+    background: #072c52;
+    color: #fff;
+    border-radius: 30px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  /* If you prefer arrows on left/right floating inside slider (instead of below),
+     you can uncomment and use the block below instead:
+  .nav.prev { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); }
+  .nav.next { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); }
+  */
+
+  /* Make sure slider image stacked and not hidden */
+  .slider .slide { display: flex !important; flex-direction: column; }
+  .slider-image img { width: 100%; max-width: 100%; height: auto; margin: 0 auto; }
+}
