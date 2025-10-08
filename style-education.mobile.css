@@ -1,0 +1,123 @@
+/* Mobile responsive overrides for CodeNova page
+   Save as `style-education.mobile.css` and include AFTER `style-education.css`:
+   <link rel="stylesheet" href="style-education.css">
+   <link rel="stylesheet" href="style-education.mobile.css">
+
+   Targets common breakpoints and improves layout for phones/tablets.
+*/
+
+/* ======= Base adjustments for tablets and small desktops ======= */
+@media (max-width: 992px) {
+  /* Navbar */
+  .navbar { padding: 12px 20px; }
+  .logo img { height: 44px; }
+  .nav-links { gap: 12px; }
+  .nav-links li a { font-size: 15px; }
+  .login-btn { padding: 7px 14px; }
+
+  /* Hero -> stack and center */
+  .hero { padding: 40px 20px; min-height: auto; flex-direction: column; text-align: center; }
+  .hero-content { max-width: 100%; margin-bottom: 20px; }
+  .hero-content h1 { font-size: 2.2rem; }
+  .hero-content p { font-size: 1rem; }
+  .hero-image img { max-width: 480px; width: 100%; height: auto; }
+
+  /* Features grid -> wrap */
+  .features-container { gap: 18px; }
+  .feature-card { width: calc(50% - 18px); }
+
+  /* About -> stack */
+  .about-container { flex-direction: column; gap: 18px; }
+  .about-image img { width: 100%; max-width: 560px; }
+
+  /* Stats grid -> fewer columns */
+  .stats-container { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+
+  /* Path container smaller gaps */
+  .path-container { gap: 20px; }
+}
+
+/* ======= Mobile phones ======= */
+@media (max-width: 768px) {
+  /* NAVBAR: show hamburger and hide links by default (controlled by JS class .show) */
+  .hamburger { display: flex; }
+  .nav-links { display: none; position: absolute; top: 64px; left: 0; width: 100%; background: #fff; flex-direction: column; align-items: center; gap: 6px; padding: 14px 0; border-top: 1px solid #eee; }
+  .nav-links.show { display: flex; animation: fadeIn 220ms ease; }
+  .nav-links li { width: 100%; text-align: center; }
+  .nav-links li a { display: block; padding: 12px 10px; width: 100%; }
+
+  /* Make hero compact */
+  .hero { padding: 30px 14px; }
+  .hero-content h1 { font-size: 1.8rem; line-height: 1.15; }
+  .hero-content p { font-size: 0.98rem; }
+  .btn-group { justify-content: center; }
+  .btn { padding: 10px 18px; }
+
+  /* Features -> single column cards */
+  .features-container { display: flex; flex-direction: column; align-items: center; }
+  .feature-card { width: 92%; }
+
+  /* About */
+  .about-container { padding: 0 8px; }
+  .about-image img { max-width: 100%; height: auto; }
+
+  /* Stats */
+  .stats { padding: 60px 10px; }
+  .stat-card { padding: 24px 12px; }
+
+  /* Learning paths -> single column cards */
+  .path-container { grid-template-columns: 1fr; padding: 0 10px; }
+  .path-card { padding: 20px; }
+  .path-card button { padding: 12px; }
+
+  /* Mentors -> stack */
+  .mentors-container { flex-direction: column; align-items: center; }
+  .mentor-card { width: 86%; }
+  .mentor-card img { width: 140px; height: 140px; }
+
+  /* Testimonial -> stack and center */
+  .testimonial-section { flex-direction: column; gap: 18px; }
+  .testimonial { max-width: 100%; }
+  .icon { width: 64px; height: 64px; font-size: 24px; }
+  .speech { font-size: 14px; }
+
+  /* Banner images -> make responsive */
+  .banner img { width: 80%; max-width: 360px; }
+
+  /* Events -> single column */
+  .events { grid-template-columns: 1fr; padding: 20px 12px; }
+  .event-card { max-width: 100%; }
+  .events a { margin-left: 0; }
+
+  /* Footer -> stack columns */
+  footer .footer-links { flex-direction: column; gap: 12px; }
+}
+
+/* ======= Very small phones ======= */
+@media (max-width: 480px) {
+  .logo img { height: 40px; }
+  .hero-content h1 { font-size: 1.5rem; }
+  .hero-content p { font-size: 0.95rem; }
+  .feature-card h3 { font-size: 1rem; }
+  .feature-card p { font-size: 0.9rem; }
+  .path-card h3 { font-size: 1.05rem; }
+  .path-card p { font-size: 0.88rem; }
+  .btn { padding: 9px 14px; }
+  .login-btn { padding: 8px 12px; font-size: 14px; }
+  footer p { font-size: 0.9rem; padding: 0 10px; }
+}
+
+/* Accessibility: enlarge interactive touch targets on coarse pointers */
+@media (pointer: coarse) {
+  .btn, .login-btn, .hamburger, .path-card button { padding: 12px 16px; }
+}
+
+/* Small animation helper (already in main file but safe to include) */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Optional: utility to keep long content readable on tiny screens */
+@media (max-width: 420px) {
+  .hero, .about, .features, .learning-paths { padding-left: 10px; padding-right: 10px; }
+}
+
+/* End of mobile overrides */

@@ -1,0 +1,176 @@
+/* Mobile / Small-screen responsive overrides for your site
+   Save as `style.mobile.css` and include AFTER your main stylesheet:
+   <link rel="stylesheet" href="style.css">
+   <link rel="stylesheet" href="style.mobile.css">
+
+   This file uses only CSS media queries to adapt layout for
+   tablets and phones (<= 768px and <= 480px). For an off-canvas
+   hamburger menu or more interactive behaviors a little JS will
+   be needed — I added comments where that would help.
+*/
+
+/* === GLOBAL ADJUSTMENTS FOR SMALL SCREENS === */
+@media (max-width: 768px) {
+  html, body { font-size: 14px; }
+
+  /* Navbar becomes vertical and compact */
+  .navbar {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+  }
+
+  .logo img { width: 56px; height: 56px; }
+
+  /* Make nav-links wrap and use smaller spacing */
+  .nav-links {
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  /* Each nav link becomes slightly smaller pill */
+  .nav-links a {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+
+  /* Dropdowns: position relative to their parent and full-width on small screens */
+  .dropdown {
+    position: static;
+    display: none; /* keeps current hover behaviour; show with hover or JS */
+    width: 100%;
+    background-color: rgba(115,126,137,0.95);
+    border-radius: 6px;
+    margin-top: 6px;
+  }
+
+  /* Hero: reduce height and scale text */
+  .hero-section {
+    height: auto;
+    padding: 80px 16px 40px;
+    background-position: center top;
+  }
+
+  .hero-content h1 { font-size: 28px; }
+  .hero-content h2 { font-size: 20px; }
+  .hero-content p { font-size: 15px; }
+
+  .buttons { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+  .btn, .btn-outline { padding: 10px 14px; font-size: 14px; }
+
+  /* About stats stack nicely */
+  .about-stats { gap: 16px; }
+  .stat { border-right: none; max-width: none; text-align: center; }
+  .stat h2 { font-size: 26px; }
+  .stat p { font-size: 14px; line-height: 1.4; }
+
+  /* Services cards stack to single column */
+  .services-cards, .service-section { flex-direction: column; align-items: center; }
+  .service-card { max-width: 92%; padding: 20px; }
+
+  /* Slider: images and content stack vertically */
+  .slide { flex-direction: column; padding: 20px; }
+  .slider-image img { width: 100%; max-width: 420px; }
+  .slider-content { max-width: 100%; }
+
+  .nav.prev, .nav.next { display: none; } /* optional: remove arrows on small screens */
+
+  /* Tech grid -> single column */
+  .tech-grid { gap: 24px; }
+  .category { flex-direction: column; align-items: stretch; }
+  .label { min-width: auto; margin: 0 0 8px 0; }
+  .tags { margin-left: 0; }
+  .tags span { padding: 8px 12px; font-size: 14px; }
+
+  /* Industries and client logos */
+  .industries { flex-direction: column; gap: 20px; }
+  .client-logos { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 18px; }
+  .client-logos img { max-width: 90px; max-height: 50px; }
+
+  /* Outsourcing / India dev sections: stack */
+  .outsourcing-section, .india-dev-section { padding: 30px 16px; }
+  .image-container, .image-column { order: 0; width: 100%; }
+  .content, .text-column { width: 100%; }
+
+  /* Cards grid becomes single column */
+  .card-container { grid-template-columns: 1fr; }
+
+  /* Footer columns stack */
+  .footer-top { flex-direction: column; gap: 20px; }
+  .footer-column { margin: 0; }
+
+  /* Prevent huge section top padding on mobile (your global rule adds 100px) */
+  section { scroll-margin-top: 72px; padding-top: 72px; }
+}
+
+/* === NARROW / PHONE PORTRAIT (VERY SMALL) === */
+@media (max-width: 480px) {
+  html, body { font-size: 13px; }
+
+  .logo img { width: 48px; height: 48px; }
+
+  .navbar { padding: 10px 12px; }
+
+  /* Make nav links take full width and stack under the navbar visually
+     Note: this will show the full list. If you prefer a hidden hamburger menu,
+     add a small JS toggle that adds `.navbar--open` class and uncomment rules below.
+  */
+  .nav-links { width: 100%; justify-content: space-between; gap: 6px; }
+  .nav-links li { width: auto; }
+  .nav-links a { padding: 8px 10px; font-size: 13px; }
+
+  .hero-content h1 { font-size: 22px; }
+  .hero-content h2 { font-size: 18px; }
+  .hero-content p { font-size: 14px; }
+
+  .service-card { padding: 16px; }
+  .service-card h3 { font-size: 18px; }
+
+  .slider-image img { max-width: 100%; height: auto; }
+  .slider-content h1 { font-size: 1.25rem; }
+
+  .tags span { padding: 6px 10px; font-size: 13px; }
+
+  .cta-section { padding: 28px 16px; }
+  .cta-button { padding: 12px 18px; }
+
+  /* small tweaks for lists, spacing */
+  .content p, .text-column p, .about-text p { font-size: 14px; }
+
+  /* Very small client logos */
+  .client-logos img { max-width: 72px; max-height: 42px; }
+
+  /* Section padding reduction */
+  .about-section, .services-section, .salsabi-section { padding: 30px 14px; }
+
+  /* Optional (recommended): Simple CSS-only off-canvas hamburger idea using checkbox
+     Add the following HTML to your navbar (near logo) if you want a hamburger without JS:
+
+     <input id="nav-toggle" type="checkbox" />
+     <label for="nav-toggle" class="nav-toggle-label">☰</label>
+
+     Then uncomment the rules below to hide nav-links by default and reveal when checked.
+  */
+
+  /*
+  #nav-toggle { display: none; }
+  .nav-toggle-label { font-size: 26px; cursor: pointer; margin-left: auto; }
+  .nav-links { display: none; width: 100%; flex-direction: column; }
+  #nav-toggle:checked + .nav-links { display: flex; }
+  */
+}
+
+/* Accessibility helper: increase touch target size for interactive items */
+@media (pointer: coarse) {
+  .nav-links a, .btn, .case-button, .cta-button, .tab { padding: 12px 14px; }
+}
+
+/* Small improvement: Reduce the hero background fixed-size on mobile (avoid large download) */
+@media (max-width: 768px) {
+  .hero-section { background-attachment: scroll; }
+}
+
+/* End of mobile overrides */
